@@ -1,0 +1,5 @@
+<mat-list role="list">
+    <mat-list-item class="listitem" *ngFor="let list  of sideNavContent" routerLink="/{{list.link}}" routerLinkActive="active">
+        {{list.title | titlecase}}
+    </mat-list-item>
+</mat-list>
