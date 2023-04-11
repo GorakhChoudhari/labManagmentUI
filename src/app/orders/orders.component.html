@@ -1,0 +1,42 @@
+<h3>My Orders</h3>
+<table mat-table [dataSource]="listOfOrders">
+
+
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
+    </ng-container>
+
+    <!-- UserName Column -->
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> UserName </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+    <!-- Book Id  -->
+    <ng-container matColumnDef="bookid">
+        <th mat-header-cell *matHeaderCellDef> Book Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.bookId}} </td>
+    </ng-container>
+
+    <!-- Book -->
+    <ng-container matColumnDef="book">
+        <th mat-header-cell *matHeaderCellDef> Book Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.bookName}} </td>
+    </ng-container>
+
+    <!-- Date -->
+    <ng-container matColumnDef="Date">
+        <th mat-header-cell *matHeaderCellDef> Order Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.orderedOn | date:'dd-MM-yyyy'}} </td>
+    </ng-container>
+
+    <!-- Returend -->
+    <ng-container matColumnDef="returned">
+        <th mat-header-cell *matHeaderCellDef> Returned Status </th>
+        <td mat-cell *matCellDef="let element"> {{element.returned ? 'yes':'no'}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="coloumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: coloumns;"></tr>
+</table>

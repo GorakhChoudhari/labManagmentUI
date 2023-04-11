@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User, UserType } from '../model/model';
+import { Book, Order, User, UserType } from '../model/model';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
@@ -57,4 +57,27 @@ export class ApiService {
     };
     return user
   }
+
+  getAllBooks(){
+    return this.http.get<Book[]>(this.baseUrl + 'GetAllBooks')
+  }
+
+  OrderBook(userId:any , bookId:number){
+    return this.http.get(this.baseUrl + 'OrderBook/' + userId + '/' + bookId ,{
+      responseType:'text',
+    })
+  }
+  GetordersOfBook(userId:any){
+return this.http.get<Order[]>(this.baseUrl + 'GetOrders/' + userId)
+  }
+
+  getAllOrders(){
+    return this.http.get<Order[]>(this.baseUrl + 'GetOrders')
+  }
+  ReturnBook(bookId:any,userId:any){
+    return this.http.get(this.baseUrl + 'ReturnBook/' + bookId + '/' + userId,{
+      responseType:'text'
+    });
+  }
 }
+

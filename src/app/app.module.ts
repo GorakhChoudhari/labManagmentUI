@@ -14,6 +14,9 @@ import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor, JwtModule } from '@auth0/angular-jwt';
+import { OrdersComponent } from './orders/orders.component';
+import { AllOrdersComponent } from './all-orders/all-orders.component';
+import { ReturnBookComponent } from './return-book/return-book.component';
 
 
 @NgModule({
@@ -25,6 +28,9 @@ import { JwtInterceptor, JwtModule } from '@auth0/angular-jwt';
     LibraryComponent,
     LoginComponent,
     RegisterComponent,
+    OrdersComponent,
+    AllOrdersComponent,
+    ReturnBookComponent,
     
   ],
   imports: [

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Book, CategoryBook } from '../model/model'
+import { ApiService } from '../Services/api.service';
+import { exists } from 'fs';
 
 @Component({
   selector: 'app-library',
@@ -6,10 +9,109 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./library.component.scss']
 })
 export class LibraryComponent implements OnInit {
+  availableBooks:Book[]=[];
+  booksToDisplay:CategoryBook[]=[];
+  displayedColumns :string[]=[
+    'id',
+    'title',
+    'author',
+    'price',
+    'available',
+    'order'
+  ]; 
 
-  constructor() { }
+
+  constructor(private api:ApiService) { }
 
   ngOnInit(): void {
+this.getAllBook();
+  }
+  getAllBook(){
+  this.api.getAllBooks().subscribe({
+    next:(res:Book[]) =>{
+      this.availableBooks=[]
+      for (var book of res )this.availableBooks.push(book);
+      this.updateList()
+    },
+    error:(err:any) =>{
+      console.log(err);
+      
+    }
+  });
+}
+  
+
+  updateList() {
+    this.booksToDisplay = [];
+    for (let book of this.availableBooks) {
+      let exist = false;
+      for (let categoryBooks of this.booksToDisplay) {
+        if (
+          book.category === categoryBooks.category &&
+          book.subCategory === categoryBooks.subCategory
+        )
+          exist = true;
+      }
+
+      if (exist) {
+        for (let categoryBooks of this.booksToDisplay) {
+          if (
+            book.category === categoryBooks.category &&
+            book.subCategory === categoryBooks.subCategory
+          )
+            categoryBooks.books.push(book);
+        }
+      } else {
+        this.booksToDisplay.push({
+          category: book.category,
+          subCategory: book.subCategory,
+          books: [book],
+        });
+      }
+    }
+
+  }
+  public getBookCount(){
+    return this.booksToDisplay.reduce((pv,cv)=>cv.books.length + pv,0)
   }
 
-}
+  
+  search(value: string) {
+    value = value.toLowerCase();
+    console.log("search",value);
+    
+    this.updateList();
+    if (value.length > 0) {
+      this.booksToDisplay = this.booksToDisplay.filter((categoryBooks) => {
+        categoryBooks.books = categoryBooks.books.filter(
+          (book) =>
+            book.title.toLowerCase().includes(value) ||
+            book.author.toLowerCase().includes(value)
+        );
+        return categoryBooks.books.length > 0;
+      });
+    }
+  }
+
+  OrderBook(book:Book){
+    let userId = this.api.gettokeninfo()?.id?? 0 ;
+    this.api.OrderBook(userId,book.id).subscribe({
+      next:(res:any )=> {
+        if(res ==='success'){
+          book.available = false;
+        }
+        this.getAllBook();
+      },
+      error:(err:any)=>{
+        console.log("Error",err);
+        
+      }
+      });
+    }
+
+  }
+
+
+
+
+

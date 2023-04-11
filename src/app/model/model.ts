@@ -21,4 +21,27 @@ export interface SideNavItem {
 
 
   }
-  
+  export interface Book{
+    id:number;
+    title:string;
+    category:string;
+    subCategory:string;
+    price:number;
+    available:boolean;
+    count:string;
+    author:string;
+  }
+  export interface CategoryBook{
+    category:string;
+    subCategory:string;
+    books:Book[];
+  }
+  export interface Order{
+    id:number;
+    userid:number;
+    name:string;
+    bookid:number;
+    booktitle:string;
+    orderno:string;
+    returned:boolean;
+  }
