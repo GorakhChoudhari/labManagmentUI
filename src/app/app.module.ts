@@ -17,6 +17,7 @@ import { JwtInterceptor, JwtModule } from '@auth0/angular-jwt';
 import { OrdersComponent } from './orders/orders.component';
 import { AllOrdersComponent } from './all-orders/all-orders.component';
 import { ReturnBookComponent } from './return-book/return-book.component';
+import { ViewUsersComponent } from './view-users/view-users.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { ReturnBookComponent } from './return-book/return-book.component';
     OrdersComponent,
     AllOrdersComponent,
     ReturnBookComponent,
+    ViewUsersComponent,
     
   ],
   imports: [

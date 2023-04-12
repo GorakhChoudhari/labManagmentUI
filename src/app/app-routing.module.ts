@@ -8,6 +8,7 @@ import { AuthguardGuard } from 'src/gurad/authguard.guard';
 import { AllOrdersComponent } from './all-orders/all-orders.component';
 import { AuthorizationGuard } from 'src/gurad/authorization.guard';
 import { ReturnBookComponent } from './return-book/return-book.component';
+import { ViewUsersComponent } from './view-users/view-users.component';
 
 const routes: Routes = [ 
   {
@@ -36,6 +37,11 @@ const routes: Routes = [
   {
     path:"books/return",
     component:ReturnBookComponent,
+    canActivate:[AuthorizationGuard]
+  },
+  {
+    path:"users/list",
+    component:ViewUsersComponent,
     canActivate:[AuthorizationGuard]
   },
 
