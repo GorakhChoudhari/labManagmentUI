@@ -111,4 +111,18 @@ export class ApiService {
       responseType: 'text',
     });
   }
+
+  insertBook(book:any){
+     return this.http.post(this.baseUrl + 'InsertBook' ,book,{
+      responseType:'text'
+    });
+
+  }
+
+  deleteBook(id:any){
+    return this.http.post(this.baseUrl + 'deleteBook/' + id,{
+      responseType:'text'
+    });
+
+  }
 }

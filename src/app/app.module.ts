@@ -18,6 +18,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { AllOrdersComponent } from './all-orders/all-orders.component';
 import { ReturnBookComponent } from './return-book/return-book.component';
 import { ViewUsersComponent } from './view-users/view-users.component';
+import { ManagebooksComponent } from './managebooks/managebooks.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { ViewUsersComponent } from './view-users/view-users.component';
     AllOrdersComponent,
     ReturnBookComponent,
     ViewUsersComponent,
+    ManagebooksComponent,
     
   ],
   imports: [

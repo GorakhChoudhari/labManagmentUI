@@ -9,6 +9,7 @@ import { AllOrdersComponent } from './all-orders/all-orders.component';
 import { AuthorizationGuard } from 'src/gurad/authorization.guard';
 import { ReturnBookComponent } from './return-book/return-book.component';
 import { ViewUsersComponent } from './view-users/view-users.component';
+import { ManagebooksComponent } from './managebooks/managebooks.component';
 
 const routes: Routes = [ 
   {
@@ -42,6 +43,11 @@ const routes: Routes = [
   {
     path:"users/list",
     component:ViewUsersComponent,
+    canActivate:[AuthorizationGuard]
+  },
+   {
+    path:"books/maintenance",
+    component:ManagebooksComponent,
     canActivate:[AuthorizationGuard]
   },
 
